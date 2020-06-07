@@ -1,1 +1,271 @@
+#include <iostream>
+#include <cstdlib>
 
+using namespace std;
+//PARTE #1,2,3
+class compTecnicaEspecial{
+public:
+
+    compTecnicaEspecial(){}
+    virtual void tecnicaEspecial()=0;
+    virtual ~compTecnicaEspecial(){}
+};
+
+    class compGolpePatada{
+    public:
+
+        compGolpePatada(){}
+        virtual void Patada()=0;
+        virtual ~compGolpePatada(){}
+
+    };
+
+    class compPoder{
+    public:
+
+        compPoder(){}
+        virtual void Poder()=0;
+        virtual ~compPoder(){}
+    };
+
+
+    //PARTE #4
+    class genkidama:public compTecnicaEspecial{
+    public:
+        genkidama(){}
+        ~genkidama(){}
+
+
+        void tecnicaEspecial(){
+            cout<<"Goku ejecuto como tecnica especial la genkidama"<<endl;
+        }
+
+
+    };
+
+    class rasenga:public compTecnicaEspecial{
+    public:
+        rasenga(){}
+        ~rasenga(){}
+
+        void tecnicaEspecial(){
+            cout<<"Naruto ejecuto como tecnica especial la rasenga"<<endl;
+        }
+
+
+    };
+
+    class voltiocruel:public compTecnicaEspecial{
+    public:
+        voltiocruel(){}
+        ~voltiocruel(){}
+
+        void tecnicaEspecial(){
+            cout<<"Pikachu ejecuto como tecnica especial voltio cruel"<<endl;
+        }
+
+    };
+
+    //PARTE #5
+    class paLarga:public compGolpePatada{
+    public:
+        paLarga(){}
+        ~paLarga(){}
+
+        void Patada(){
+            cout<<"Goku utilizo la patada larga"<<endl;
+        }
+
+    };
+
+    class punietazo:public compGolpePatada{
+    public:
+        punietazo(){}
+        ~punietazo(){}
+
+        void Patada(){
+            cout<<"Naruto utilizo el punietazo"<<endl;
+        }
+
+    };
+
+    class puntapie:public compGolpePatada{
+    public:
+        puntapie(){}
+        ~puntapie(){}
+
+        void Patada(){
+            cout<<"Pikachu utilizo el punta pie"<<endl;
+        }
+
+    };
+
+    //PARTE #6
+    class kame:public compPoder{
+    public:
+
+        kame(){}
+        ~kame(){}
+
+        void Poder(){
+            cout<<"Goku usa el Kame-hame-ha"<<endl;
+        }
+
+    };
+
+    class rafaga:public compPoder{
+    public:
+        rafaga(){}
+        ~rafaga(){}
+
+
+        void Poder(){
+            cout<<"Naruto usa su uzumaki rafaga "<<endl;
+        }
+
+    };
+
+    class rayo:public compPoder{
+    public:
+        rayo(){}
+        ~rayo(){}
+
+        void Poder(){
+            cout<<"Pikachu usa el impactrueno"<<endl;
+        }
+
+    };
+
+    //PARTE #7
+    class luchador{
+
+    protected:
+        compTecnicaEspecial* pt1;
+        compGolpePatada* pt2;
+        compPoder* pt3;
+
+    public:
+        luchador(){}
+        virtual void saludo(){}
+        virtual void ejecutarEspecial()=0;
+        virtual void ejecutarPatada()=0;
+        virtual void ejecutarPoder()=0;
+        virtual ~luchador(){}
+
+    };
+
+    //PARTE #8
+    class Goku:public luchador{
+
+    public:
+
+        void saludo(){
+            cout<<"Hola, soy Goku"<<endl;
+        }
+        Goku(){
+            pt1 = new genkidama;
+            pt2 = new paLarga;
+            pt3 = new kame;
+        }
+        ~Goku(){
+            delete pt1;
+            delete pt2;
+            delete pt3;
+        }
+        void ejecutarEspecial(){
+            pt1->tecnicaEspecial();
+        }
+        void ejecutarPatada(){
+            pt2->Patada();
+        }
+        void ejecutarPoder(){
+            pt3->Poder();
+        }
+
+    };
+
+    class Naruto:public luchador{
+
+    public:
+
+        void saludo(){
+            cout<<"Hola, soy Naruto, y sere Hokage"<<endl;
+        }
+        Naruto(){
+            pt1 = new rasenga;
+            pt2 = new punietazo;
+            pt3 = new rafaga;
+        }
+        ~Naruto(){
+            delete pt1;
+            delete pt2;
+            delete pt3;
+        }
+        void ejecutarEspecial(){
+            pt1->tecnicaEspecial();
+        }
+        void ejecutarPatada(){
+            pt2->Patada();
+        }
+        void ejecutarPoder(){
+            pt3->Poder();
+        }
+
+    };
+
+    class pikachu:public luchador{
+
+    public:
+
+        void saludo(){
+            cout<<"PIKACHUU!!!"<<endl;
+        }
+        pikachu(){
+            pt1 = new voltiocruel;
+            pt2 = new puntapie;
+            pt3 = new rayo;
+        }
+        ~pikachu(){
+            delete pt1;
+            delete pt2;
+            delete pt3;
+        }
+        void ejecutarEspecial(){
+            pt1->tecnicaEspecial();
+        }
+        void ejecutarPatada(){
+            pt2->Patada();
+        }
+        void ejecutarPoder(){
+            pt3->Poder();
+        }
+
+    };
+
+
+
+
+
+
+int main()
+{
+    luchador* personaje = new Goku;
+    personaje->saludo();
+    personaje->ejecutarEspecial();
+    personaje->ejecutarPatada();
+    personaje->ejecutarPoder();
+    cout<<"***************************************************"<<endl;
+    personaje = new Naruto;
+    personaje->saludo();
+    personaje->ejecutarEspecial();
+    personaje->ejecutarPatada();
+    personaje->ejecutarPoder();
+    cout<<"***************************************************"<<endl;
+    personaje = new pikachu;
+    personaje->saludo();
+    personaje->ejecutarEspecial();
+    personaje->ejecutarPatada();
+    personaje->ejecutarPoder();
+    delete  personaje;
+
+}
